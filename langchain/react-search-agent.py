@@ -1,5 +1,5 @@
 from dotenv import load_dotenv
-from init_model import llm
+from langgraph.init_model import llm
 
 load_dotenv()
 
