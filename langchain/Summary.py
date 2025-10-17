@@ -1,4 +1,4 @@
-from init_model import llm
+from langgraph.init_model import llm
 
 from langchain_core.prompts import ChatPromptTemplate
 
