@@ -2,6 +2,7 @@ import operator
 from typing import Annotated, Sequence, TypedDict
 from dotenv import load_dotenv
 from langchain_openai import AzureChatOpenAI
+from langchain_ollama import ChatOllama
 from langgraph.graph.message import add_messages
 
 import os
@@ -16,6 +17,12 @@ llm = AzureChatOpenAI(
     max_tokens=None,
     timeout=None,
     max_retries=2,
+)
+
+
+ollama_llm = ChatOllama(
+    model=os.environ["OLLAMA_MODEL_NAME"],
+    temperature=0,
 )
 
 
