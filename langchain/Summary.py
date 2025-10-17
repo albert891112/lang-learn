@@ -1,4 +1,4 @@
-from langgraph.init_model import llm
+from init_model import ollama_llm
 
 from langchain_core.prompts import ChatPromptTemplate
 
@@ -9,7 +9,7 @@ Summarize the following text in a concise manner:
 
 prompt = ChatPromptTemplate.from_template(prompt_str)
 
-model_with_prompt = prompt | llm
+model_with_prompt = prompt | ollama_llm
 
 
 def summarize(text: str) -> str:

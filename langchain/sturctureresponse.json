@@ -1,0 +1,23 @@
+{
+   "input":"What is the latest news about OpenAI and Microsoft?",
+   "output":{
+      "answer": "OpenAI and Microsoft have signed a non-binding agreement to redefine their partnership terms, allowing OpenAI to restructure its corporate setup. Discussions are ongoing regarding API access, intellectual property rights, and other strategic elements, causing delays in the restructuring process.",
+      "sources": [
+         {
+            "url": "https://www.usnews.com/news/business/articles/2025-09-12/openai-reaches-new-agreement-with-microsoft-to-change-its-corporate-structure"
+         },
+         {
+            "url": "https://aibusiness.com/generative-ai/microsoft-openai-continue-to-push-beyond-their-partnership"
+         },
+         {
+            "url": "https://www.reuters.com/business/microsoft-openai-reach-non-binding-deal-allow-openai-restructure-2025-09-11/"
+         },
+         {
+            "url": "https://the-decoder.com/openais-restructuring-stalls-as-talks-with-microsoft-over-api-access-and-ip-rights-drag-on/"
+         },
+         {
+            "url": "https://finance.yahoo.com/news/microsoft-openai-sign-mou-next-213520529.html"
+         }
+      ]
+   }
+}
