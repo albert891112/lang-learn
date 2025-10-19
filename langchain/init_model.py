@@ -10,7 +10,7 @@ import os
 
 load_dotenv()
 
-llm = AzureChatOpenAI(
+LLM = AzureChatOpenAI(
     azure_deployment=os.environ["AZURE_OPENAI_CHAT_DEPLOYMENT_NAME"],
     openai_api_version=os.environ["OPENAI_API_VERSION"],
     temperature=0,
@@ -19,8 +19,7 @@ llm = AzureChatOpenAI(
     max_retries=2,
 )
 
-
-ollama_llm = ChatOllama(
+OLLAMA_LLM = ChatOllama(
     model=os.environ["OLLAMA_MODEL_NAME"],
     temperature=0,
 )

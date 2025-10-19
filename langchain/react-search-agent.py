@@ -1,5 +1,5 @@
 from dotenv import load_dotenv
-from langgraph.init_model import llm
+from init_model import llm
 from langchain import hub
 from langchain.agents import AgentExecutor
 from langchain.agents.react.agent import create_react_agent

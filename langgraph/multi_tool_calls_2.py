@@ -3,7 +3,7 @@ from typing import Literal
 
 from init_model import AllState, llm
 from langchain.prompts import ChatPromptTemplate
-from langchain_core.messages import HumanMessage
+from langchain_core.messages import HumanMessage, AIMessage, ToolMessage
 from langchain_core.tools import StructuredTool
 from langgraph.graph import StateGraph
 from langgraph.prebuilt import ToolNode
