@@ -55,6 +55,9 @@ get_age_tool = StructuredTool.from_function(
 )
 
 tool = [get_name_tool, get_age_tool]
+tool2 = [get_name_tool, get_age_tool]
+tool3 = [get_name_tool, get_age_tool]
+
 tool_node = ToolNode(tools=tool)
 
 model_with_tools = llm.bind_tools(tool)
