@@ -1,10 +1,10 @@
 import operator
-from typing import Annotated, Sequence, TypedDict
+from typing import Annotated, List, Sequence, Tuple, TypedDict
 from dotenv import load_dotenv
 from langchain_openai import AzureChatOpenAI
 from langchain_ollama import ChatOllama
 from langgraph.graph.message import add_messages
-
+from langchain.agents.agent import AgentAction, AgentFinish
 import os
 
 
@@ -35,3 +35,16 @@ class AllState(TypedDict):
     messages: Annotated[Sequence[str], operator.add]
     IsComplete: bool
     todo: list[str]
+
+
+def format_log_to_str(
+    intermediate_steps: List[Tuple[AgentAction, str]],
+    observation_prefix: str = "Observation: ",
+    thought_prefix: str = "Thought: ",
+) -> str:
+    """Construct the scratchpad that let agent continue its thought process."""
+    thoughts = ""
+    for action, observation in intermediate_steps:
+        thoughts += action.log
+        thoughts += f"{observation_prefix}{observation}\n{thought_prefix}"
+    return thoughts
