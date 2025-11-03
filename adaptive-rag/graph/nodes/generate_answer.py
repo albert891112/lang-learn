@@ -5,7 +5,7 @@ from graph.instructions import RAG_PROMPT
 from utility.formatter import format_docs
 
 
-def generate_answer(state: GraphState):
+def answer_generator(state: GraphState):
     """
     Generate answer using RAG on retrieved documents
 

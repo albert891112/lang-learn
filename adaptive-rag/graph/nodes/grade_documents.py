@@ -1,20 +1,14 @@
 from pydantic import BaseModel, Field
+from sqlalchemy import true
 from graph.state import GraphState
 from graph.instructions import DOC_GRADER_INSTRUCTION, DOC_GRADER_PROMPT
 from utility.init_model import LLM
 from langchain_core.messages import HumanMessage, SystemMessage
 from langchain.prompts import ChatPromptTemplate
+from graph.schemas import BinaryScore
 
 
-class BinaryScore(BaseModel):
-    """Structured output model for document relevance grading."""
-
-    binary_score: str = Field(
-        ..., description="Document relevance score ('yes' or 'no')"
-    )
-
-
-def grade_documents(state: GraphState):
+def doc_grader(state: GraphState):
     """
     Determines whether the retrieved documents are relevant to the question
     If any document is not relevant, we will set a flag to run web search
@@ -31,7 +25,7 @@ def grade_documents(state: GraphState):
     documents = state["documents"]
 
     relevant_documents = []
-    web_search = "No"
+    web_search = False
     for doc in documents:
         grade_prompt_content_formatted = DOC_GRADER_PROMPT.format(
             document=doc.page_content, question=question
@@ -56,6 +50,6 @@ def grade_documents(state: GraphState):
             print("---GRADE: DOCUMENT NOT RELEVANT---")
             # We do not include the document in filtered_docs
             # We set a flag to indicate that we want to run web search
-            web_search = "Yes"
+            web_search = True
             continue
     return {"documents": relevant_documents, "web_search": web_search}

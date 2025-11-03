@@ -13,7 +13,7 @@ class Route(BaseModel):
     )
 
 
-def route_question(state: GraphState):
+def router(state: GraphState):
     """
     Routes questions to either 'RAG' or 'websearch'.
 
@@ -41,7 +41,7 @@ def route_question(state: GraphState):
     source = route_result.dataSource
     if source == "websearch":
         print("---ROUTE QUESTION TO WEB SEARCH---")
-        return "websearch"
+        return "web_search"
     elif source == "vectorstore":
         print("---ROUTE QUESTION TO RAG---")
-        return "vectorstore"
+        return "vector_store"

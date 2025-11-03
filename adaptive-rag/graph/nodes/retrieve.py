@@ -45,7 +45,7 @@ def _get_retriever():
     return _retriever
 
 
-def retrieve(state: GraphState):
+def retriever(state: GraphState):
     """
     從向量存儲中檢索相關文檔
 

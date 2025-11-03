@@ -5,7 +5,7 @@ from langchain_tavily import TavilySearch
 web_search_tool = TavilySearch()
 
 
-def web_search(state: GraphState):
+def web_searcher(state: GraphState):
     """
     Web search based based on the question
 
