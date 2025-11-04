@@ -21,7 +21,9 @@ def web_searcher(state: GraphState):
     documents = state.get("documents", [])
 
     # Web search
-    docs = web_search_tool.invoke({"query": question})
+    docs = web_search_tool.invoke({"query": question})["results"]
+    print(f"Web search returned docs : {docs}")
+
     web_results = "\n".join([d["content"] for d in docs])
     web_results = Document(page_content=web_results)
     documents.append(web_results)

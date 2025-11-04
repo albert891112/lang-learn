@@ -1,20 +1,19 @@
-from graph.nodes.router import route_question
-from graph.nodes.retriever import retrieve
-from graph.state import GraphState
+from graph.service import RAG_GRAPH
+
+
+async def fact_rag():
+    config = {"recursion_limit": 50}
+    inputs = {
+        "question": "網路上傳言非洲豬瘟的防疫預算沒有被刪除，請問是真的嗎？",
+        "max_retries": 3,
+    }
+    async for event in RAG_GRAPH.astream(inputs, config=config):
+        for k, v in event.items():
+            if k != "__end__":
+                print(v)
 
 
 if __name__ == "__main__":
+    import asyncio
 
-    state = GraphState(
-        {
-            "question": "What is the capital of France?",
-            "generation": "",
-            "web_search": "No",
-            "max_retries": 3,
-            "answers": 0,
-            "loop_step": 0,
-            "documents": [],
-        }
-    )
-    print(route_question(state))
-    print(retrieve(state))
+    asyncio.run(fact_rag())

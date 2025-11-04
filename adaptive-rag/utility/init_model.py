@@ -12,12 +12,13 @@ LLM = AzureChatOpenAI(
     temperature=0,
     timeout=None,
     max_retries=2,
+    max_tokens=1000,  # 限制輸出長度，避免達到模型最大限制
 )
 
-OLLAMA_LLM = ChatOllama(
-    model=os.environ["OLLAMA_MODEL_NAME"],
-    temperature=0,
-)
+# OLLAMA_LLM = ChatOllama(
+#     model=os.environ["OLLAMA_MODEL_NAME"],
+#     temperature=0,
+# )
 
 EMBEDDING_LLM = AzureOpenAIEmbeddings(
     azure_deployment=os.environ["AZURE_OPENAI_EMBEDDING_DEPLOYMENT_NAME"],

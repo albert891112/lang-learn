@@ -16,6 +16,7 @@ def hallucination_checker(state: GraphState):
     documents = state["documents"]
     generation = state["generation"]
     max_retries = state.get("max_retries", 3)  # Default to 3 if not provided
+    loop_step = state.get("loop_step")
 
     hallucination_grader_prompt_formatted = HALLUCINATION_GRADER_PROMPT.format(
         documents=format_docs(documents), generation=generation.content
@@ -24,13 +25,5 @@ def hallucination_checker(state: GraphState):
         [SystemMessage(content=HALLUCINATION_GRADER_INSTRUCTIONS)]
         + [HumanMessage(content=hallucination_grader_prompt_formatted)]
     )  # type: ignore[assignment]
-    grade = result.binary_score
 
-    if grade.lower() == "yes":
-        print("---GRADE: NO HALLUCINATIONS DETECTED---")
-        return "supported"
-    elif state["loop_step"] <= max_retries:
-        print("---GRADE: HALLUCINATIONS DETECTED, RETRYING---")
-        return "not supported"
-    else:
-        return "max_retries_exceeded"
+    return {"score": result}

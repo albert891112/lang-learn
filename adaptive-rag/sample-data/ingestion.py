@@ -1,6 +1,11 @@
 from http import client
 from langchain_text_splitters import RecursiveCharacterTextSplitter
-from ..utility.qdrant_manger import QdrantManager
+import sys
+import os
+
+# 添加父目錄到 Python 路徑
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+from utility.qdrant_manger import QdrantManager
 from langchain_community.document_loaders import TextLoader
 import os
 from langchain_openai import AzureOpenAIEmbeddings
@@ -55,6 +60,6 @@ with QdrantManager() as manager:
     )
 
     # 加入文件至向量資料庫
-    # vector_store.add_documents(documents=docs_split)
+    vector_store.add_documents(documents=docs_split)
 
-    retriever = vector_store.as_retriever()
+    # retriever = vector_store.as_retriever()

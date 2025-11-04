@@ -1,7 +1,7 @@
 from typing import TypedDict, List, Annotated
 from langchain_core.documents import Document
 from langchain_core.messages import AIMessage
-from graph.schemas import BinaryScore
+from graph.schemas import BinaryScore, Route
 import operator
 
 
@@ -14,10 +14,9 @@ class GraphState(TypedDict):
     generation (str): LLM generation
     web_search (bool): Binary decision to run web search
     max_retries (int): Max number of retries for answer generation
-    from_answer (bool): Flag indicating if the flow is from answers node
-    answer (str): answer from answers node
     loop_step (int): Loop step counter
     documents (List[str]): List of retrieved documents
+    route (Route): Route decision information
     """
 
     question: str  # User question
@@ -27,3 +26,4 @@ class GraphState(TypedDict):
     max_retries: int  # Max number of retries for answer generation
     loop_step: Annotated[int, operator.add]
     documents: List[Document]  # List of retrieved documents
+    route: Route

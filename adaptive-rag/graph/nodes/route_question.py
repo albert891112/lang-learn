@@ -4,13 +4,7 @@ from graph.state import GraphState
 from langchain.prompts import ChatPromptTemplate
 from langchain_core.messages import SystemMessage, HumanMessage
 from graph.instructions import ROUTER_INSTRUCTION
-
-
-# Define the structured output model for routing
-class Route(BaseModel):
-    dataSource: str = Field(
-        ..., description="Data source to route to: 'RAG' or 'websearch'"
-    )
+from graph.schemas import Route
 
 
 def router(state: GraphState):
@@ -36,12 +30,4 @@ def router(state: GraphState):
     )
     router = prompt | LLM.with_structured_output(Route)
 
-    route_result: Route = router.invoke({"question": question})  # type: ignore[assignment]
-
-    source = route_result.dataSource
-    if source == "websearch":
-        print("---ROUTE QUESTION TO WEB SEARCH---")
-        return "web_search"
-    elif source == "vectorstore":
-        print("---ROUTE QUESTION TO RAG---")
-        return "vector_store"
+    return {"route": router.invoke({"question": question})}
